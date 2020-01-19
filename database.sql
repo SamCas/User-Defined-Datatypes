@@ -101,14 +101,8 @@ CREATE TABLE purchase_tab OF purchase_order_t (
   SCOPE FOR (custref) IS customer_tab
   )
   NESTED TABLE line_item_list STORE AS po_line_tab;
-  
-ALTER TABLE po_line_tab
-  ADD (SCOPE FOR (stockref) IS stock_tab);
 
 CREATE TYPE line_item_list_t AS TABLE OF line_item_t;
-
-ALTER TABLE po_line_tab
-  STORAGE (NEXT 5K PCTINCREASE 5 MINEXTENTS 1 MAXEXTENTS 20);
   
 CREATE INDEX po_nested_in
   ON po_line_tab (NESTED_TABLE_ID);
